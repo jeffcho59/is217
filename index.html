@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Mangled date examples</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,14 +11,70 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.7.1.min.js"></script>
+        <script src="js/vendor/modernizr-2.7.1.min.js">
+		function prettyDate(time){
+    var date = new Date(time || ""),
+      diff = (((new Date()).getTime() - date.getTime()) / 1000),
+      day_diff = Math.floor(diff / 86400);
+ 
+    if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+      return;
+ 
+    return day_diff == 0 && (
+        diff < 60 && "just now" ||
+        diff < 120 && "1 minute ago" ||
+        diff < 3600 && Math.floor( diff / 60 ) +
+          " minutes ago" ||
+        diff < 7200 && "1 hour ago" ||
+        diff < 86400 && Math.floor( diff / 3600 ) +
+          " hours ago") ||
+      day_diff == 1 && "Yesterday" ||
+      day_diff < 7 && day_diff + " days ago" ||
+      day_diff < 31 && Math.ceil( day_diff / 7 ) +
+        " weeks ago";
+  }
+  window.onload = function() {
+    var links = document.getElementsByTagName("a");
+    for ( var i = 0; i < links.length; i++ ) {
+      if ( links[i].title ) {
+        var date = prettyDate(links[i].title);
+        if ( date ) {
+          links[i].innerHTML = date;
+        }
+      }
+    }
+  };
+		</script>
     </head>
     <body>
+	
+	<ul>
+  <li class="entry">
+    <p>blah blah blah...</p>
+    <small class="extra">
+      Posted <span class="time">
+        <a href="/2008/01/blah/57/" title="2008-01-28T20:24:17Z">
+          <span>January 28th, 2008</span>
+        </a>
+      </span>
+      by <span class="author"><a href="/john/">John Resig</a></span>
+    </small>
+  </li>
+  <!-- more list items -->
+</ul>
+	
+	
+	
         <!--[if lt IE 8]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
+		
+		
+		
+		
+		
         <p>Hello world! This is HTML5 Boilerplate.</p>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -26,6 +82,15 @@
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
